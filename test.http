@@ -1,0 +1,40 @@
+@email = "ruanv123@gmail.com"
+@password = "123456"
+
+# @name autenticar
+POST http://localhost:3000/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email": {{email}},
+    "password": {{password}}
+}
+
+
+### 
+
+@token = {{autenticar.response.body.access_token}}
+
+// @name cadastrar site
+POST http://localhost:3000/api/v1/app
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "urlLogo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzgsugD6HETxbO4sxMJ0eFi-pLNjMTuMfRM4TfAaSjBw&s",
+    "nomeApp": "lego",
+    "linkCheckout": "sdadasda",
+    "codAfiliado": "dsadada",
+    "linkTwitch": "dasdada",
+    "linkComunidade": "dadada"
+}
+
+###
+GET  http://localhost:3000/api/v1/app
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+DELETE   http://localhost:3000/api/v1/app/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
