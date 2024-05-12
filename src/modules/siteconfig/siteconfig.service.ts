@@ -75,6 +75,6 @@ export class SiteconfigService {
       throw new HttpException('Id not found', HttpStatus.NOT_FOUND);
     }
 
-    return await this.db.dados.delete({ where: { id } });
+    await this.db.dados.delete({ where: { id } });
   }
 }
