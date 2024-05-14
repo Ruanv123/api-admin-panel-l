@@ -28,6 +28,7 @@ model Dados {
   linkBanner3    String?
   linkTwitch     String
   linkComunidade String
+  color          String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

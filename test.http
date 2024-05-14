@@ -26,7 +26,8 @@ Authorization: Bearer {{token}}
     "linkCheckout": "sdadasda",
     "codAfiliado": "dsadada",
     "linkTwitch": "dasdada",
-    "linkComunidade": "dadada"
+    "linkComunidade": "dadada",
+    "color": "#323232"
 }
 
 ###
@@ -41,3 +42,12 @@ GET  http://localhost:3000/api/v1/
 DELETE   http://localhost:3000/api/v1/app/1
 Content-Type: application/json
 Authorization: Bearer {{token}}
+
+###
+PATCH http://localhost:3000/api/v1/app/2
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "nomeApp": "teste"
+}
