@@ -10,6 +10,7 @@ import {
 import { SiteconfigService } from './siteconfig.service';
 import { ApiTags } from '@nestjs/swagger';
 import { Dados } from '@prisma/client';
+import { IsPublic } from '../auth/decorators/isPublic.decorator';
 
 @ApiTags('App config')
 @Controller('app')
@@ -26,6 +27,7 @@ export class SiteconfigController {
     return this.siteconfigService.findAll();
   }
 
+  @IsPublic()
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.siteconfigService.findOne(+id);
