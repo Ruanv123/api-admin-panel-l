@@ -1,4 +1,9 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { User } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
@@ -37,5 +42,35 @@ export class UserService {
         email,
       },
     });
+  }
+
+  async findOneByEMail(email: string): Promise<User> {
+    return await this.db.user.findUnique({
+      where: {
+        email,
+      },
+    });
+  }
+
+  async resetPassword(id: number, newPassword: string) {
+    const user = await this.db.user.findUnique({
+      where: {
+        id,
+      },
+    });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    const updatedUser = await this.db.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        password: await bcrypt.hash(newPassword, 10),
+      },
+    });
+
+    return updatedUser;
   }
 }
